@@ -6,6 +6,8 @@ if (process.env.NODE_ENV !== "production") {
 
 const client = new Client({ apiUrl: process.env.LANGGRAPH_API_URL });
 console.log("Connecting to: ", process.env.LANGGRAPH_API_URL);
+// wait 5 seconds
+await new Promise(resolve => setTimeout(resolve, 5000));
 const response = await client.runs.wait(
     null, // Threadless run
     "agent", // Assistant ID
@@ -19,4 +21,4 @@ const response = await client.runs.wait(
     }
 );
 
-console.log(streamResponse.messages.pop().content);
+console.log(response.messages.pop().content);
